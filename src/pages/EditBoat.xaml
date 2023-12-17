@@ -1,0 +1,190 @@
+﻿<Page x:Class="JachtZ.src.pages.EditBoat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JachtZ.src.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditBoat">
+	<Page.Resources>
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<Style x:Key="characteristics" TargetType="StackPanel">
+			<Style.Resources>
+				<Style TargetType="Label">
+					<Setter Property="Margin" Value="5 5 15 0"/>
+					<Setter Property="Foreground" Value="White"/>
+				</Style>
+				<Style TargetType="Image">
+					<Setter Property="Margin" Value="15 0 5 0 "/>
+				</Style>
+			</Style.Resources>
+		</Style>
+	</Page.Resources>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition />
+			<RowDefinition Height="70" />
+		</Grid.RowDefinitions>
+
+		<Label FontSize="20"
+			   VerticalAlignment="Center"
+			   Margin="20 0">Редактор лодок</Label>
+
+		<Grid Grid.Row="1"
+			  Margin="20">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Border Background="White"/>
+
+			<StackPanel Grid.Column="1"
+						Style="{StaticResource characteristics}"
+						Background="DarkBlue">
+
+				<Grid >
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<Image x:Name="model_edit" 
+						   Width="15"
+						   Height="15"
+						   Source="{StaticResource pencil}"
+						   MouseDown="edit_MouseDown"/>
+
+					<Label x:Name="model" 
+						   Grid.Column="1"
+						   HorizontalAlignment="Right"
+						   FontSize="24"
+						   Margin="0 10 15 15"
+						   Content="{Binding ElementName=model_text, Path=Text}" />
+
+					<TextBox x:Name="model_text" 
+							 Grid.Column="1"
+							 HorizontalAlignment="Right"
+							 FontSize="24"
+							 Margin="0 10 15 15"
+							 Padding="20 0" 
+							 Visibility="Collapsed"
+							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 Text="{Binding ElementName=model, Path=Content}"/>
+				</Grid>
+				<Grid >
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition />
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Image x:Name="type_edit" 
+						   Width="15"
+						   Height="15"
+						   Source="{StaticResource pencil}"
+						   MouseDown="edit_MouseDown"/>
+
+					<Label Grid.Column="1">Тип</Label>
+					<Label x:Name="type" 
+						   Grid.Column="2" 
+						   Content="{Binding ElementName=type_text, Path=Text}"/>
+					<TextBox x:Name="type_text" 
+							 Grid.Column="2"
+							 Visibility="Collapsed"
+							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 Text="{Binding ElementName=type, Path=Content}"/>
+				</Grid>
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition />
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Image x:Name="color_edit"
+						   Width="15"
+						   Height="15"
+						   Source="{StaticResource pencil}"
+						   MouseDown="edit_MouseDown"/>
+
+					<Label Grid.Column="1">Цвет</Label>
+					<Label x:Name="color" 
+						   Grid.Column="2" 
+						   Content="{Binding ElementName=color_text, Path=Text}"/>
+					<TextBox x:Name="color_text" 
+							 Grid.Column="2"
+							 Padding="10 0" 
+							 Visibility="Collapsed"
+							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 Text="{Binding ElementName=color, Path=Content}"/>
+				</Grid>
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="auto"/>
+						<ColumnDefinition />
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Image x:Name="wood_edit"
+						   Width="15"
+						   Height="15"
+						   Source="{StaticResource pencil}"
+						   MouseDown="edit_MouseDown"/>
+
+					<Label Grid.Column="1">Дерево</Label>
+					<Label x:Name="wood" 
+						   Grid.Column="2" 
+						   Content="{Binding ElementName=wood_text, Path=Text}"/>
+					<TextBox x:Name="wood_text" 
+							 Grid.Column="2"
+							 Padding="10 0" 
+							 Visibility="Collapsed"
+							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 Text="{Binding ElementName=wood, Path=Content}"/>
+				</Grid>
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition Width="auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Image x:Name="price_edit" Width="15"
+						   Height="15"
+						   Source="{StaticResource pencil}"
+						   HorizontalAlignment="Left"
+						   MouseDown="edit_MouseDown"/>
+
+					<Label x:Name="price" 
+						   Grid.Column="2" 
+						   Content="{Binding ElementName=price_text, Path=Text}"/>
+					<TextBox x:Name="price_text" 
+							 Grid.Column="2"
+							 Padding="10 0" 
+							 Visibility="Collapsed"
+							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 Text="{Binding ElementName=price, Path=Content}"/>
+				</Grid>
+			</StackPanel>
+			
+		</Grid>
+		
+		<Label x:Name="delete_boat" 
+			   Grid.Row="2"
+			   FontSize="20"
+			   Background="DarkRed"
+			   HorizontalContentAlignment="Center"
+			   VerticalAlignment="Center"
+			   Margin="20 0">Удалить</Label>
+		
+	</Grid>
+</Page>

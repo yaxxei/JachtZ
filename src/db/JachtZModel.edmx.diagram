@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="815816529fc042e6b8b3de8ca988ec25" Name="Diagram1">
+        <EntityTypeShape EntityType="JachtZModel.Accessory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.AccToBoat" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Boat" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Contract" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Customer" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Invoice" Width="1.5" PointX="10.5" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Order" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.OrderDetail" Width="1.5" PointX="8.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.Partner" Width="1.5" PointX="1.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.SalesPerson" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JachtZModel.sysdiagram" Width="1.5" PointX="5.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="JachtZModel.FK_Accessory_Partner" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_AccToBoats_Accessory" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_OrderDetails_Accessory" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_AccToBoats_Boat" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_Order_Boat" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_Contract_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_Invoice_Contract" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_Order_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_Order_SalesPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="JachtZModel.FK_OrderDetails_Order" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

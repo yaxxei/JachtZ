@@ -1,0 +1,153 @@
+﻿<Window x:Class="JachtZ.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JachtZ"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+		WindowStartupLocation="CenterScreen">
+
+	<Window.Resources>
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<Style x:Key="acc" TargetType="StackPanel">
+			<Style.Resources>
+				<Style TargetType="Border">
+					<Setter Property="Margin" Value="10 10 5 10"/>
+				</Style>
+			</Style.Resources>
+		</Style>
+
+		<Style x:Key="nav" TargetType="StackPanel">
+			<Style.Resources>
+				<Style TargetType="StackPanel">
+					<Setter Property="Margin" Value="0 5"/>
+				</Style>
+				<Style TargetType="Polygon">
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Fill" Value="White"/>
+						</Trigger>
+					</Style.Triggers>
+					<Setter Property="Margin" Value="10 0 0 0 "/>
+				</Style>
+			</Style.Resources>
+		</Style>
+	</Window.Resources>
+
+	<Grid x:Name="main">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="5"/>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+
+		<Grid x:Name="side">
+			<Grid.Background>
+				<SolidColorBrush>
+					<SolidColorBrush.Color>
+						<Color A="255" R="0" G="65" B="101"/>
+					</SolidColorBrush.Color>
+				</SolidColorBrush>
+			</Grid.Background>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="auto"/>
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<StackPanel x:Name="acc"
+						Style="{StaticResource acc}"
+						Orientation="Horizontal">
+				<Border Width="50"
+						Height="50"
+						Background="Black"
+						CornerRadius="50"/>
+				<StackPanel Orientation="Vertical"
+							Margin="0 10">
+					<Label x:Name="username">Разиль Саматов</Label>
+					<Label x:Name="role">Админ</Label>
+				</StackPanel>
+			</StackPanel>
+
+			<ScrollViewer Grid.Row="1"
+						  VerticalScrollBarVisibility="Auto"
+						  HorizontalScrollBarVisibility="Disabled">
+				<StackPanel x:Name="nav"
+							Orientation="Vertical"
+							Style="{StaticResource nav}">
+					<StackPanel x:Name="nav_boats" 
+								MouseDown="nav_MouseDown">
+						<StackPanel Orientation="Horizontal"
+									VerticalAlignment="Center">
+							<Polygon x:Name="expand_boats" 
+									 Stroke="White"
+									 Points="5,2.5 5,12.5 12.5,7.5"
+									 Width="15"
+									 Height="15"/>
+							<Label x:Name="boats">Лодки</Label>
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel x:Name="nav_accessories"
+								MouseDown="nav_MouseDown">
+						<StackPanel Orientation="Horizontal">
+							<Polygon x:Name="expand_accessories" 
+									 Stroke="White"							 
+									 Points="5,2.5 5,12.5 12.5,7.5"
+									 Width="15"
+									 Height="15"/>
+							<Label x:Name="accessories">Аксессуары</Label>
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel x:Name="nav_clients"
+								MouseDown="nav_MouseDown">
+						<StackPanel Orientation="Horizontal">
+							<Polygon x:Name="expand_clients" 
+									 Stroke="White"
+									 Points="5,2.5 5,12.5 12.5,7.5"
+									 Width="15"
+									 Height="15"/>
+							<Label x:Name="clients">Клиенты</Label>
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel x:Name="nav_orders" 
+								MouseDown="nav_MouseDown">
+						<StackPanel Orientation="Horizontal">
+							<Polygon x:Name="expand_orders" 
+									 Stroke="White"
+									 Points="5,2.5 5,12.5 12.5,7.5"
+									 Width="15"
+									 Height="15"/>
+							<Label x:Name="orders">Заказы</Label>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</ScrollViewer>
+		</Grid>
+
+		<Border x:Name="drag"
+				Grid.Column="1"
+				Background="Black"
+				Cursor="SizeWE"
+				MouseDown="drag_MouseDown"
+				MouseUp="drag_MouseUp"
+				MouseMove="drag_MouseMove"/>
+
+		<Frame x:Name="frame" 
+			   Grid.Column="2"
+			   NavigationUIVisibility="Hidden">
+			<Frame.Background>
+				<SolidColorBrush>
+					<SolidColorBrush.Color>
+						<Color A="255" R="0" G="159" B="218"/>
+					</SolidColorBrush.Color>
+				</SolidColorBrush>
+			</Frame.Background>
+		</Frame>
+	</Grid>
+</Window>

@@ -1,0 +1,67 @@
+﻿<Page x:Class="JachtZ.src.pages.Boats"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JachtZ.src.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Boats">
+	<Page.Resources>
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+	</Page.Resources>
+	
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition />
+			<RowDefinition Height="70" />
+		</Grid.RowDefinitions>
+
+		<Grid VerticalAlignment="Center">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Label FontSize="20">Лодки</Label>
+			<Label Grid.Column="1"
+				   HorizontalAlignment="Right">Фильтр</Label>
+		</Grid>
+
+		<ScrollViewer x:Name="scrollViewer" 
+					  Grid.Row="1"
+					  VerticalScrollBarVisibility="Disabled"
+					  HorizontalScrollBarVisibility="Auto">
+			<StackPanel x:Name="panel"
+						Orientation="Horizontal"
+						MouseWheel="ZoomInOut_MouseWheel"
+						Background="Transparent"/>
+		</ScrollViewer>
+
+		<Border x:Name="add_boat"
+				Grid.Row="2"
+				Width="50"
+				Height="50"
+				CornerRadius="50"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				MouseDown="add_boat_MouseDown">
+			<Border.Background>
+				<SolidColorBrush>
+					<SolidColorBrush.Color>
+						<Color A="255" R="0" G="65" B="101"/>
+					</SolidColorBrush.Color>
+				</SolidColorBrush>
+			</Border.Background>
+			<Label FontSize="30"
+					FontWeight="Bold"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Margin="-2 -5 -2 0">+</Label>
+		</Border>
+		
+	</Grid>
+</Page>
