@@ -5,10 +5,74 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:JachtZ.src.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="600"
       Title="Accessories">
+	<Page.Resources>
+		<Style TargetType="Label">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+	</Page.Resources>
 
-    <Grid>
-        
-    </Grid>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition />
+			<RowDefinition Height="70" />
+		</Grid.RowDefinitions>
+
+		<Grid VerticalAlignment="Center">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Label FontSize="20">Аксессуары</Label>
+			<StackPanel Grid.Column="1"
+						Orientation="Horizontal"
+						HorizontalAlignment="Right"
+						VerticalAlignment="Center">
+				<Image x:Name="search"
+					   Source="{StaticResource search}"
+					   Width="20"
+					   Height="20"/>
+				<TextBox x:Name="search_text" MinWidth="150"
+						 VerticalAlignment="Center"
+						 Padding="7 2"
+						 Margin="5 0 20 0"/>
+			</StackPanel>
+
+		</Grid>
+
+		<ScrollViewer x:Name="scrollViewer" 
+					  Grid.Row="1"
+					  VerticalScrollBarVisibility="Disabled"
+					  HorizontalScrollBarVisibility="Auto">
+			<StackPanel x:Name="panel"
+						Orientation="Horizontal"
+						Background="Transparent"/>
+		</ScrollViewer>
+
+		<Border x:Name="add_boat"
+				Grid.Row="2"
+				Width="50"
+				Height="50"
+				CornerRadius="50"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Center"
+				Margin="20 0">
+			<Border.Background>
+				<SolidColorBrush>
+					<SolidColorBrush.Color>
+						<Color A="255" R="0" G="65" B="101"/>
+					</SolidColorBrush.Color>
+				</SolidColorBrush>
+			</Border.Background>
+			<Label FontSize="30"
+					FontWeight="Bold"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Margin="-2 -5 -2 0">+</Label>
+		</Border>
+
+	</Grid>
 </Page>

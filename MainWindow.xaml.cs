@@ -18,6 +18,7 @@ using JachtZ.src.db;
 using JachtZ.src.windows;
 using JachtZ.src.pages;
 using JachtZ.src.events;
+using System.Xml.Linq;
 
 namespace JachtZ
 {
@@ -34,6 +35,7 @@ namespace JachtZ
 		private bool isClientsExpand = false;
 		private bool isOrdersExpand = false;
 
+		private double scale = 1.0;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -43,7 +45,7 @@ namespace JachtZ
 
 			Auth authWin = new Auth();
 			authWin.AuthSaccessful += AuthWin_AutAuthSaccessful;
-			
+
 			authWin.Show();
 			this.Hide();
 		}
@@ -63,6 +65,11 @@ namespace JachtZ
 		public static MainWindow GetInstance()
 		{
 			return instance;
+		}
+
+		public void SaveDataBase()
+		{
+			db.SaveChanges();
 		}
 
 		private void drag_MouseDown(object sender, MouseButtonEventArgs e)
@@ -91,7 +98,7 @@ namespace JachtZ
 			}
 		}
 
-		private void navList_Open<T>(List<T> list)
+		private void navList_Expand<T>(List<T> list)
 		{
 			StackPanel expandPanel = new StackPanel();
 			expandPanel.Orientation = Orientation.Vertical;
@@ -104,9 +111,15 @@ namespace JachtZ
 				Label label = new Label();
 				label.Margin = new Thickness { Left = 40 };
 
+				int index = i;
+
 				if (list is List<Boat> boats)
 				{
 					label.Content = boats[i].Model;
+					label.MouseDown += (o, e) =>
+					{
+						frame.Navigate(new EditBoat(boats[index].boat_ID, boats[index].Model, boats[index].BoatType, boats[index].Colour, boats[index].Wood, boats[index].BasePrice));
+					};
 					stackPanel.Children.Add(label);
 				}
 				else if (list is List<Accessory> accessories)
@@ -153,28 +166,47 @@ namespace JachtZ
 			// Points="5,2.5 5,12.5 12.5,7.5"
 			// Points="12.5,4.5 5,12.5 12.5,12.5"
 
-			StackPanel element = (StackPanel)sender;
-			if (element.Name == "nav_boats")
+			Label element = (Label)sender;
+			if (element.Name == "boats")
+			{
+				frame.Navigate(new Boats());
+			}
+			else if (element.Name == "accessories")
+			{
+				frame.Navigate(new Accessories());
+			}
+			else if (element.Name == "clients")
+			{
+				frame.Navigate(new Clients());
+			}
+			else if (element.Name == "orders")
+			{
+				frame.Navigate(new Orders());
+			}
+		}
+
+		private void expand_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			Grid element = (Grid)sender;
+			if (element.Name == "expand_boats")
 			{
 				isBoatsExpand = !isBoatsExpand;
 
 				if (!isBoatsExpand)
 				{
-					expand_boats.Fill = Brushes.White;
-					expand_boats.Points = new PointCollection() {
+					expander_boats.Fill = Brushes.White;
+					expander_boats.Points = new PointCollection() {
 						new Point(12.5, 4.5),
 						new Point(5, 12.5),
 						new Point(12.5, 12.5)
 					};
 
-					frame.Navigate(new Boats());
-
-					navList_Open(db.Boats.ToList());
+					navList_Expand(db.Boats.ToList());
 				}
 				else
 				{
-					expand_boats.Fill = Brushes.Transparent;
-					expand_boats.Points = new PointCollection() {
+					expander_boats.Fill = Brushes.Transparent;
+					expander_boats.Points = new PointCollection() {
 						new Point(5, 2.5),
 						new Point(5, 12.5),
 						new Point(12.5, 7.5)
@@ -184,27 +216,25 @@ namespace JachtZ
 						nav_boats.Children.RemoveAt(1);
 				}
 			}
-			else if (element.Name == "nav_accessories")
+			else if (element.Name == "expand_accessories")
 			{
 				isAccessoriesExpand = !isAccessoriesExpand;
 
 				if (!isAccessoriesExpand)
 				{
-					expand_accessories.Fill = Brushes.White;
-					expand_accessories.Points = new PointCollection() {
+					expander_accessories.Fill = Brushes.White;
+					expander_accessories.Points = new PointCollection() {
 						new Point(12.5, 4.5),
 						new Point(5, 12.5),
 						new Point(12.5, 12.5)
 					};
 
-					frame.Navigate(new Accessories());
-
-					navList_Open(db.Accessories.ToList());
+					navList_Expand(db.Accessories.ToList());
 				}
 				else
 				{
-					expand_accessories.Fill = Brushes.Transparent;
-					expand_accessories.Points = new PointCollection() {
+					expander_accessories.Fill = Brushes.Transparent;
+					expander_accessories.Points = new PointCollection() {
 						new Point(5, 2.5),
 						new Point(5, 12.5),
 						new Point(12.5, 7.5)
@@ -214,27 +244,25 @@ namespace JachtZ
 						nav_accessories.Children.RemoveAt(1);
 				}
 			}
-			else if (element.Name == "nav_clients")
+			else if (element.Name == "expand_clients")
 			{
 				isClientsExpand = !isClientsExpand;
 
-				if (!isClientsExpand) 
+				if (!isClientsExpand)
 				{
-					expand_clients.Fill = Brushes.White;
-					expand_clients.Points = new PointCollection() {
+					expander_clients.Fill = Brushes.White;
+					expander_clients.Points = new PointCollection() {
 						new Point(12.5, 4.5),
 						new Point(5, 12.5),
 						new Point(12.5, 12.5)
 					};
 
-					frame.Navigate(new Clients());
-
-					navList_Open(db.Customers.ToList());
+					navList_Expand(db.Customers.ToList());
 				}
 				else
 				{
-					expand_clients.Fill = Brushes.Transparent;
-					expand_clients.Points = new PointCollection() {
+					expander_clients.Fill = Brushes.Transparent;
+					expander_clients.Points = new PointCollection() {
 						new Point(5, 2.5),
 						new Point(5, 12.5),
 						new Point(12.5, 7.5)
@@ -244,27 +272,25 @@ namespace JachtZ
 						nav_clients.Children.RemoveAt(1);
 				}
 			}
-			else if (element.Name == "nav_orders")
+			else if (element.Name == "expand_orders")
 			{
 				isOrdersExpand = !isOrdersExpand;
 
 				if (!isOrdersExpand)
 				{
-					expand_orders.Fill = Brushes.White;
-					expand_orders.Points = new PointCollection() {
+					expander_orders.Fill = Brushes.White;
+					expander_orders.Points = new PointCollection() {
 						new Point(12.5, 4.5),
 						new Point(5, 12.5),
 						new Point(12.5, 12.5)
 					};
 
-					frame.Navigate(new Orders());
-
-					navList_Open(db.Orders.ToList());
+					navList_Expand(db.Orders.ToList());
 				}
 				else
 				{
-					expand_orders.Fill = Brushes.Transparent;
-					expand_orders.Points = new PointCollection() {
+					expander_orders.Fill = Brushes.Transparent;
+					expander_orders.Points = new PointCollection() {
 						new Point(5, 2.5),
 						new Point(5, 12.5),
 						new Point(12.5, 7.5)
@@ -273,6 +299,21 @@ namespace JachtZ
 					if (nav_orders.Children.Count > 1)
 						nav_orders.Children.RemoveAt(1);
 				}
+			}
+		}
+
+		private void side_PreviewKeyDown(object sender, KeyEventArgs e)
+		{
+			if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+			{
+				if (e.Key == Key.Add || e.Key == Key.OemPlus)
+					if (scale < 4.0)
+						scale *= 1.2;
+				if (e.Key == Key.Subtract || e.Key == Key.OemMinus)
+					if (scale > 0.5)
+						scale /= 1.2;
+
+				side.LayoutTransform = new ScaleTransform(scale, scale);
 			}
 		}
 	}

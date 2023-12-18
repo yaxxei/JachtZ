@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:JachtZ.src.windows"
         mc:Ignorable="d"
         Title="Auth" Height="450" Width="800"
-		WindowStartupLocation="CenterScreen">
+		WindowStartupLocation="CenterScreen"
+		ResizeMode="NoResize">
 	<Window.Background>
 		<SolidColorBrush>
 			<SolidColorBrush.Color>

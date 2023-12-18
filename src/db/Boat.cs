@@ -22,14 +22,13 @@ namespace JachtZ.src.db
         }
     
         public int boat_ID { get; set; }
-		public string Model { get; set; }
-		public decimal BasePrice { get; set; }
+        public string Model { get; set; }
         public string BoatType { get; set; }
         public Nullable<double> NumberOfRowers { get; set; }
         public bool Mast { get; set; }
         public string Colour { get; set; }
         public string Wood { get; set; }
-        //public Nullable<decimal> BasePrice { get; set; }
+        public Nullable<decimal> BasePrice { get; set; }
         public Nullable<double> VAT { get; set; }
         public string F10 { get; set; }
         public Nullable<double> F11 { get; set; }
@@ -38,5 +37,5 @@ namespace JachtZ.src.db
         public virtual ICollection<AccToBoat> AccToBoats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-	}
+    }
 }

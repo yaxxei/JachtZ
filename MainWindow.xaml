@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JachtZ"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="500" Width="800"
 		WindowStartupLocation="CenterScreen">
 
 	<Window.Resources>
@@ -26,26 +26,37 @@
 				<Style TargetType="StackPanel">
 					<Setter Property="Margin" Value="0 5"/>
 				</Style>
-				<Style TargetType="Polygon">
-					<Style.Triggers>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter Property="Fill" Value="White"/>
-						</Trigger>
-					</Style.Triggers>
+				<Style TargetType="Grid">
 					<Setter Property="Margin" Value="10 0 0 0 "/>
 				</Style>
+				<!--<Style TargetType="Polygon">
+					<Style.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Setter Property="Fill">
+								<Setter.Value>
+									<SolidColorBrush>
+										<SolidColorBrush.Color>
+											<Color A="255" R="255" G="255" B="255"/>
+										</SolidColorBrush.Color>
+									</SolidColorBrush>
+								</Setter.Value>
+							</Setter>
+						</Trigger>
+					</Style.Triggers>
+				</Style>-->
 			</Style.Resources>
 		</Style>
 	</Window.Resources>
 
 	<Grid x:Name="main">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="200"/>
 			<ColumnDefinition Width="5"/>
 			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
-		<Grid x:Name="side">
+		<Grid x:Name="side"
+			  PreviewKeyDown="side_PreviewKeyDown">
 			<Grid.Background>
 				<SolidColorBrush>
 					<SolidColorBrush.Color>
@@ -78,52 +89,79 @@
 				<StackPanel x:Name="nav"
 							Orientation="Vertical"
 							Style="{StaticResource nav}">
-					<StackPanel x:Name="nav_boats" 
-								MouseDown="nav_MouseDown">
+					<StackPanel x:Name="nav_boats">
 						<StackPanel Orientation="Horizontal"
 									VerticalAlignment="Center">
-							<Polygon x:Name="expand_boats" 
-									 Stroke="White"
-									 Points="5,2.5 5,12.5 12.5,7.5"
-									 Width="15"
-									 Height="15"/>
-							<Label x:Name="boats">Лодки</Label>
+							<Grid x:Name="expand_boats" 
+								  PreviewMouseDown="expand_MouseDown"
+								  Width="20"
+								  Height="20"
+								  Background="Transparent">
+								<Polygon x:Name="expander_boats"
+										 Stroke="White"
+										 Points="5,2.5 5,12.5 12.5,7.5"
+										 Width="15"
+										 Height="15"
+										 Margin="0 0 1 0"/>
+							</Grid>
+							
+							<Label x:Name="boats"
+								   MouseDown="nav_MouseDown">Лодки</Label>
 						</StackPanel>
 					</StackPanel>
 
-					<StackPanel x:Name="nav_accessories"
-								MouseDown="nav_MouseDown">
+					<StackPanel x:Name="nav_accessories">
 						<StackPanel Orientation="Horizontal">
-							<Polygon x:Name="expand_accessories" 
-									 Stroke="White"							 
-									 Points="5,2.5 5,12.5 12.5,7.5"
-									 Width="15"
-									 Height="15"/>
-							<Label x:Name="accessories">Аксессуары</Label>
+							<Grid x:Name="expand_accessories" 
+								  MouseDown="expand_MouseDown"
+								  Width="20"
+								  Height="20"
+								  Background="Transparent">
+								<Polygon x:Name="expander_accessories" 
+										 Stroke="White"							 
+										 Points="5,2.5 5,12.5 12.5,7.5"
+										 Width="15"
+										 Height="15"/>
+							</Grid>
+							
+							<Label x:Name="accessories"
+								   MouseDown="nav_MouseDown">Аксессуары</Label>
 						</StackPanel>
 					</StackPanel>
 
-					<StackPanel x:Name="nav_clients"
-								MouseDown="nav_MouseDown">
+					<StackPanel x:Name="nav_clients">
 						<StackPanel Orientation="Horizontal">
-							<Polygon x:Name="expand_clients" 
-									 Stroke="White"
-									 Points="5,2.5 5,12.5 12.5,7.5"
-									 Width="15"
-									 Height="15"/>
-							<Label x:Name="clients">Клиенты</Label>
+							<Grid x:Name="expand_clients" 
+								  MouseDown="expand_MouseDown"
+								  Width="20"
+								  Height="20"
+								  Background="Transparent">
+								<Polygon x:Name="expander_clients" 
+										 Stroke="White"							 
+										 Points="5,2.5 5,12.5 12.5,7.5"
+										 Width="15"
+										 Height="15"/>
+							</Grid>
+							<Label x:Name="clients"
+								   MouseDown="nav_MouseDown">Клиенты</Label>
 						</StackPanel>
 					</StackPanel>
 
-					<StackPanel x:Name="nav_orders" 
-								MouseDown="nav_MouseDown">
+					<StackPanel x:Name="nav_orders">
 						<StackPanel Orientation="Horizontal">
-							<Polygon x:Name="expand_orders" 
-									 Stroke="White"
-									 Points="5,2.5 5,12.5 12.5,7.5"
-									 Width="15"
-									 Height="15"/>
-							<Label x:Name="orders">Заказы</Label>
+							<Grid x:Name="expand_orders" 
+								  MouseDown="expand_MouseDown"
+								  Width="20"
+								  Height="20"
+								  Background="Transparent">
+								<Polygon x:Name="expander_orders" 
+											Stroke="White"							 
+											Points="5,2.5 5,12.5 12.5,7.5"
+											Width="15"
+											Height="15"/>
+							</Grid>
+							<Label x:Name="orders"
+								   MouseDown="nav_MouseDown">Заказы</Label>
 						</StackPanel>
 					</StackPanel>
 				</StackPanel>

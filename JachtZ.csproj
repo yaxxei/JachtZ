@@ -212,6 +212,9 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="src\assets\icons\pencil.png" />
+    <Resource Include="src\assets\icons\save.png" />
+    <Resource Include="src\assets\icons\search.png" />
+    <Resource Include="src\assets\icons\trash.png" />
     <Content Include="src\db\JachtZModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>JachtZModel.Context.cs</LastGenOutput>

@@ -10,12 +10,15 @@
 	<Page.Resources>
 		<Style TargetType="Label">
 			<Setter Property="Foreground" Value="White"/>
+		</Style> 
+		<Style TargetType="TextBox">
+			<Setter Property="MinWidth" Value="30"/>
+			<Setter Property="Margin" Value="15 0"/>
 		</Style>
-
 		<Style x:Key="characteristics" TargetType="StackPanel">
 			<Style.Resources>
 				<Style TargetType="Label">
-					<Setter Property="Margin" Value="5 5 15 0"/>
+					<Setter Property="Margin" Value="5 0 15 0"/>
 					<Setter Property="Foreground" Value="White"/>
 				</Style>
 				<Style TargetType="Image">
@@ -32,12 +35,30 @@
 			<RowDefinition Height="70" />
 		</Grid.RowDefinitions>
 
-		<Label FontSize="20"
-			   VerticalAlignment="Center"
-			   Margin="20 0">Редактор лодок</Label>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			
+			<Label FontSize="20"
+				   VerticalAlignment="Center"
+				   Margin="20 0">Редактор лодок</Label>
 
-		<Grid Grid.Row="1"
-			  Margin="20">
+			<Image x:Name="save_changes"
+				   Grid.Column="1"
+				   Source="{StaticResource save}"
+				   Width="50"
+				   Height="50"
+				   HorizontalAlignment="Right"
+				   Margin="20 0"
+				   MouseDown="save_changes_MouseDown"/>
+		</Grid>
+
+		<Grid x:Name="editor" 
+			  Grid.Row="1"
+			  Margin="20"
+			  MouseWheel="ZoomInOut_MouseWheel">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition />
@@ -75,7 +96,7 @@
 							 Margin="0 10 15 15"
 							 Padding="20 0" 
 							 Visibility="Collapsed"
-							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 PreviewKeyDown="edit_PreviewKeyDown"
 							 Text="{Binding ElementName=model, Path=Content}"/>
 				</Grid>
 				<Grid >
@@ -98,7 +119,7 @@
 					<TextBox x:Name="type_text" 
 							 Grid.Column="2"
 							 Visibility="Collapsed"
-							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 PreviewKeyDown="edit_PreviewKeyDown"
 							 Text="{Binding ElementName=type, Path=Content}"/>
 				</Grid>
 
@@ -123,7 +144,7 @@
 							 Grid.Column="2"
 							 Padding="10 0" 
 							 Visibility="Collapsed"
-							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 PreviewKeyDown="edit_PreviewKeyDown"
 							 Text="{Binding ElementName=color, Path=Content}"/>
 				</Grid>
 
@@ -143,13 +164,20 @@
 					<Label Grid.Column="1">Дерево</Label>
 					<Label x:Name="wood" 
 						   Grid.Column="2" 
-						   Content="{Binding ElementName=wood_text, Path=Text}"/>
-					<TextBox x:Name="wood_text" 
-							 Grid.Column="2"
-							 Padding="10 0" 
-							 Visibility="Collapsed"
-							 PreviewKeyDown="model_edit_PreviewKeyDown"
-							 Text="{Binding ElementName=wood, Path=Content}"/>
+						   Content="{Binding ElementName=wood_combo, Path=SelectedItem.Content}"/>
+					<ComboBox x:Name="wood_combo"
+							  Grid.Column="2"
+							  Padding="10 0" 
+							  Visibility="Collapsed"
+							  PreviewKeyDown="edit_PreviewKeyDown"
+							  Text="{Binding ElementName=wood, Path=Content}">
+						<ComboBoxItem>Ель</ComboBoxItem>
+						<ComboBoxItem>Сосна</ComboBoxItem>
+						<ComboBoxItem>Дуб</ComboBoxItem>
+						<ComboBoxItem>Береза</ComboBoxItem>
+						<ComboBoxItem>Лиственница</ComboBoxItem>
+					</ComboBox>
+
 				</Grid>
 
 				<Grid>
@@ -171,20 +199,51 @@
 							 Grid.Column="2"
 							 Padding="10 0" 
 							 Visibility="Collapsed"
-							 PreviewKeyDown="model_edit_PreviewKeyDown"
+							 PreviewKeyDown="edit_PreviewKeyDown"
 							 Text="{Binding ElementName=price, Path=Content}"/>
 				</Grid>
 			</StackPanel>
 			
 		</Grid>
-		
-		<Label x:Name="delete_boat" 
-			   Grid.Row="2"
-			   FontSize="20"
-			   Background="DarkRed"
-			   HorizontalContentAlignment="Center"
-			   VerticalAlignment="Center"
-			   Margin="20 0">Удалить</Label>
-		
+
+		<Grid x:Name="delete_boat" 
+			  Grid.Row="2" 
+			  Background="DarkRed"
+			  MouseDown="delete_boat_MouseDown"
+			  Margin="20 10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Image Source="{StaticResource trash}"
+				   Width="30"
+				   Height="30"
+				   HorizontalAlignment="Right"
+				   Margin="10 0"/>
+
+			<Label Grid.Column="1" 
+				   FontSize="24"
+				   VerticalAlignment="Center">Удалить</Label>
+		</Grid>
+
+		<StackPanel x:Name="sure"
+					Grid.Row="2"
+					Orientation="Horizontal"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Visibility="Collapsed">
+			<Label FontSize="24">Уверены?</Label>
+			<Label x:Name="yes" FontSize="24"
+				   Margin="20 0"
+				   Width="80"
+				   HorizontalContentAlignment="Center"
+				   Background="Green"
+				   MouseDown="sure_MouseDown">Да</Label>
+			<Label x:Name="no" FontSize="24"
+				   Background="Red"
+				   Width="80"
+				   HorizontalContentAlignment="Center"
+				   MouseDown="sure_MouseDown">Нет</Label>
+		</StackPanel>
 	</Grid>
 </Page>

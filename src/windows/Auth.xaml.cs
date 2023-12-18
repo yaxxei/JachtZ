@@ -37,7 +37,7 @@ namespace JachtZ.src.windows
 
 		private void Auth_Click(object sender, RoutedEventArgs e)
 		{
-			if (login_text.Text.Length > 0 && password_text.Text.Length > 0) 
+			if (login_text.Text.Length > 0 && password_text.Text.Length > 0)
 			{
 				foreach (SalesPerson person in salesPersons)
 				{
@@ -47,7 +47,7 @@ namespace JachtZ.src.windows
 						AuthSaccessful?.Invoke(this, new AuthEventArgs($"{person.FirstName} {person.FamilyName}"));
 
 						this.Close();
-					} 
+					}
 					else
 					{
 						input.Children.Add(errorLabel("Неверный логин или пароль"));
@@ -62,7 +62,7 @@ namespace JachtZ.src.windows
 
 		private Label errorLabel(String error)
 		{
-			if (input.Children.Count == 3) 
+			if (input.Children.Count == 3)
 			{
 				input.Children.RemoveAt(2);
 

@@ -6,6 +6,9 @@
     <Application.Resources>
 		<ResourceDictionary>
 			<BitmapImage x:Key="pencil" UriSource="src/assets/icons/pencil.png" />
+			<BitmapImage x:Key="save" UriSource="src/assets/icons/save.png" />
+			<BitmapImage x:Key="search" UriSource="src/assets/icons/search.png" />
+			<BitmapImage x:Key="trash" UriSource="src/assets/icons/trash.png" />
 		</ResourceDictionary>
-    </Application.Resources>
+	</Application.Resources>
 </Application>

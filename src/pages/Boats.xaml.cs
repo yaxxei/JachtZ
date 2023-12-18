@@ -34,7 +34,7 @@ namespace JachtZ.src.pages
 			InitializeComponent();
 
 			boats = db.Boats.ToList();
-			loadBoats();
+			loadBoats(boats);
 		}
 
 		public Grid createCatergory(String c, String v)
@@ -60,9 +60,11 @@ namespace JachtZ.src.pages
 			return grid;
 		}
 
-		public void loadBoats()
+		public void loadBoats(List<Boat> list)
 		{
-			for (int i = 0; i < boats.Count; i++) 
+			panel.Children.Clear();
+			
+			for (int i = 0; i < list.Count; i++) 
 			{
 				Grid grid = new Grid();
 				grid.RowDefinitions.Add(new RowDefinition());
@@ -75,11 +77,11 @@ namespace JachtZ.src.pages
 
 				grid.MouseDown += (o, e) =>
 				{
-					mainWindow.frame.Navigate(new EditBoat(boats[boatIndex].Model, boats[boatIndex].BoatType, boats[boatIndex].Colour, boats[boatIndex].Wood, boats[boatIndex].BasePrice));
+					mainWindow.frame.Navigate(new EditBoat(list[boatIndex].boat_ID, list[boatIndex].Model, list[boatIndex].BoatType, list[boatIndex].Colour, list[boatIndex].Wood, list[boatIndex].BasePrice));
 				};
 
 				Border img = new Border();
-				img.Background = Brushes.Black;
+				img.Background = Brushes.White;
 				grid.Children.Add(img);
 				Grid.SetRow(img, 0);
 
@@ -88,19 +90,19 @@ namespace JachtZ.src.pages
 				panelDesc.Background = new SolidColorBrush(Color.FromRgb(0, 65, 101));
 
 				Label model = new Label();
-				model.Content = boats[i].Model;
+				model.Content = list[i].Model;
 				model.HorizontalAlignment = HorizontalAlignment.Center;
 				model.FontSize = 16;
 
 				Label price = new Label();
-				price.Content = "₽" + boats[i].BasePrice;
+				price.Content = "₽" + list[i].BasePrice;
 				price.HorizontalAlignment = HorizontalAlignment.Right;
 				price.Margin = new Thickness(10, 0, 10, 0);
 
 				panelDesc.Children.Add(model);
-				panelDesc.Children.Add(createCatergory("Тип", boats[i].BoatType));
-				panelDesc.Children.Add(createCatergory("Цвет", boats[i].Colour));
-				panelDesc.Children.Add(createCatergory("Дерево", boats[i].Wood));
+				panelDesc.Children.Add(createCatergory("Тип", list	[i].BoatType));
+				panelDesc.Children.Add(createCatergory("Цвет", list[i].Colour));
+				panelDesc.Children.Add(createCatergory("Дерево", list[i].Wood));
 				panelDesc.Children.Add(price);
 
 				grid.Children.Add(panelDesc);
@@ -131,6 +133,43 @@ namespace JachtZ.src.pages
 
 				scrollViewer.LayoutTransform = new ScaleTransform(scale, scale);
 			}
+		}
+
+		private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
+		{
+			if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+			{
+				scale = 2.0;
+				scrollViewer.LayoutTransform = new ScaleTransform(scale, scale);
+			}
+			else if (Application.Current.MainWindow.WindowState == WindowState.Normal)
+			{
+				scale = 1.0;
+				scrollViewer.LayoutTransform = new ScaleTransform(scale, scale);
+			}
+		}
+
+		private void search_MouseDown(object sender, MouseButtonEventArgs e)
+		{
+			string input = search_text.Text;
+			string filter = input.Trim().Split(' ')[0].Trim();
+			string x = string.Join(" ", input.Trim().Split(' ').Skip(1));
+
+			List<Boat> newBoats = boats.Where(b =>
+			{
+				if (filter == "Модель:")
+					return b.Model.Trim() == x;
+				else if (filter == "Тип:")
+					return b.BoatType.Trim() == x;
+				else if(filter == "Цвет:")
+					return b.Colour.Trim() == x;
+				else if (filter == "Дерево:")
+					return b.Wood.Trim() == x;
+				else 
+					return false;
+			}).ToList();
+
+			loadBoats(newBoats);
 		}
 	}
 }
