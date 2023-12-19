@@ -151,22 +151,15 @@ namespace JachtZ.src.pages
 
 		private void search_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			string input = search_text.Text;
-			string filter = input.Trim().Split(' ')[0].Trim();
-			string x = string.Join(" ", input.Trim().Split(' ').Skip(1));
-
+			string input = search_text.Text.Trim();
 			List<Boat> newBoats = boats.Where(b =>
 			{
-				if (filter == "Модель:")
-					return b.Model.Trim() == x;
-				else if (filter == "Тип:")
-					return b.BoatType.Trim() == x;
-				else if(filter == "Цвет:")
-					return b.Colour.Trim() == x;
-				else if (filter == "Дерево:")
-					return b.Wood.Trim() == x;
-				else 
-					return false;
+				if (input.ToLower() == b.Model.ToLower().Trim()) return b.Model == input;
+				else if (input.ToLower() == b.BoatType.ToLower().Trim()) return b.BoatType == input;
+				else if (input.ToLower() == b.Colour.ToLower().Trim()) return b.Colour == input;
+				else if (input.ToLower() == b.Wood.ToLower().Trim()) return b.Wood == input;
+				else if (input.ToLower() == b.BasePrice.ToString()) return b.BasePrice.ToString() == input;
+				else return false;
 			}).ToList();
 
 			loadBoats(newBoats);

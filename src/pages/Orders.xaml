@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:JachtZ.src.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="600"
-      Title="Orders">
+      Title="Orders"
+	  SizeChanged="Page_SizeChanged">
 	<Page.Resources>
 		<Style TargetType="Label">
 			<Setter Property="Foreground" Value="White"/>
@@ -34,7 +35,9 @@
 				<Image x:Name="search"
 					   Source="{StaticResource search}"
 					   Width="20"
-					   Height="20"/>
+					   Height="20"
+					   MouseDown="search_MouseDown"
+					   Cursor="Hand"/>
 				<TextBox x:Name="search_text" MinWidth="150"
 						 VerticalAlignment="Center"
 						 Padding="7 2"
@@ -45,11 +48,12 @@
 
 		<ScrollViewer x:Name="scrollViewer" 
 					  Grid.Row="1"
-					  VerticalScrollBarVisibility="Disabled"
+					  VerticalScrollBarVisibility="Auto"
 					  HorizontalScrollBarVisibility="Auto">
 			<StackPanel x:Name="panel"
 						Orientation="Horizontal"
-						Background="Transparent"/>
+						Background="Transparent"
+						MouseWheel="ZoomInOut_MouseWheel" />
 		</ScrollViewer>
 
 		<Border x:Name="add_boat"

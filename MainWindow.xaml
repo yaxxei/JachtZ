@@ -106,7 +106,8 @@
 							</Grid>
 							
 							<Label x:Name="boats"
-								   MouseDown="nav_MouseDown">Лодки</Label>
+								   MouseDown="nav_MouseDown"
+								   Cursor="Hand">Лодки</Label>
 						</StackPanel>
 					</StackPanel>
 
@@ -125,7 +126,8 @@
 							</Grid>
 							
 							<Label x:Name="accessories"
-								   MouseDown="nav_MouseDown">Аксессуары</Label>
+								   MouseDown="nav_MouseDown"
+								   Cursor="Hand">Аксессуары</Label>
 						</StackPanel>
 					</StackPanel>
 
@@ -143,7 +145,8 @@
 										 Height="15"/>
 							</Grid>
 							<Label x:Name="clients"
-								   MouseDown="nav_MouseDown">Клиенты</Label>
+								   MouseDown="nav_MouseDown"
+								   Cursor="Hand">Клиенты</Label>
 						</StackPanel>
 					</StackPanel>
 
@@ -161,7 +164,8 @@
 											Height="15"/>
 							</Grid>
 							<Label x:Name="orders"
-								   MouseDown="nav_MouseDown">Заказы</Label>
+								   MouseDown="nav_MouseDown"
+								   Cursor="Hand">Заказы</Label>
 						</StackPanel>
 					</StackPanel>
 				</StackPanel>

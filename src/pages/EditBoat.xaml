@@ -52,7 +52,8 @@
 				   Height="50"
 				   HorizontalAlignment="Right"
 				   Margin="20 0"
-				   MouseDown="save_changes_MouseDown"/>
+				   MouseDown="save_changes_MouseDown"
+				   Cursor="Hand"/>
 		</Grid>
 
 		<Grid x:Name="editor" 
@@ -67,10 +68,15 @@
 			<Border Background="White"/>
 
 			<StackPanel Grid.Column="1"
-						Style="{StaticResource characteristics}"
-						Background="DarkBlue">
-
-				<Grid >
+						Style="{StaticResource characteristics}">
+				<StackPanel.Background>
+					<SolidColorBrush>
+						<SolidColorBrush.Color>
+							<Color A="255" R="0" G="65" B="101"/>
+						</SolidColorBrush.Color>
+					</SolidColorBrush>
+				</StackPanel.Background>
+				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="auto"/>
 						<ColumnDefinition />
@@ -80,7 +86,8 @@
 						   Width="15"
 						   Height="15"
 						   Source="{StaticResource pencil}"
-						   MouseDown="edit_MouseDown"/>
+						   MouseDown="edit_MouseDown"
+						   Cursor="Hand"/>
 
 					<Label x:Name="model" 
 						   Grid.Column="1"
@@ -110,7 +117,8 @@
 						   Width="15"
 						   Height="15"
 						   Source="{StaticResource pencil}"
-						   MouseDown="edit_MouseDown"/>
+						   MouseDown="edit_MouseDown"
+						   Cursor="Hand"/>
 
 					<Label Grid.Column="1">Тип</Label>
 					<Label x:Name="type" 
@@ -134,7 +142,8 @@
 						   Width="15"
 						   Height="15"
 						   Source="{StaticResource pencil}"
-						   MouseDown="edit_MouseDown"/>
+						   MouseDown="edit_MouseDown"
+						   Cursor="Hand"/>
 
 					<Label Grid.Column="1">Цвет</Label>
 					<Label x:Name="color" 
@@ -159,7 +168,8 @@
 						   Width="15"
 						   Height="15"
 						   Source="{StaticResource pencil}"
-						   MouseDown="edit_MouseDown"/>
+						   MouseDown="edit_MouseDown"
+						   Cursor="Hand"/>
 
 					<Label Grid.Column="1">Дерево</Label>
 					<Label x:Name="wood" 
@@ -190,7 +200,8 @@
 						   Height="15"
 						   Source="{StaticResource pencil}"
 						   HorizontalAlignment="Left"
-						   MouseDown="edit_MouseDown"/>
+						   MouseDown="edit_MouseDown"
+						   Cursor="Hand"/>
 
 					<Label x:Name="price" 
 						   Grid.Column="2" 
@@ -210,7 +221,8 @@
 			  Grid.Row="2" 
 			  Background="DarkRed"
 			  MouseDown="delete_boat_MouseDown"
-			  Margin="20 10">
+			  Margin="20 10"
+			  Cursor="Hand">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition />
 				<ColumnDefinition />

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:JachtZ.src.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="600"
-      Title="Clients">
+      Title="Clients"
+	  SizeChanged="Page_SizeChanged">
 	<Page.Resources>
 		<Style TargetType="Label">
 			<Setter Property="Foreground" Value="White"/>
@@ -17,7 +18,6 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="70"/>
 			<RowDefinition />
-			<RowDefinition Height="70" />
 		</Grid.RowDefinitions>
 
 		<Grid VerticalAlignment="Center">
@@ -34,7 +34,8 @@
 				<Image x:Name="search"
 					   Source="{StaticResource search}"
 					   Width="20"
-					   Height="20"/>
+					   Height="20"
+					   Cursor="Hand"/>
 				<TextBox x:Name="search_text" MinWidth="150"
 						 VerticalAlignment="Center"
 						 Padding="7 2"
@@ -49,30 +50,8 @@
 					  HorizontalScrollBarVisibility="Auto">
 			<StackPanel x:Name="panel"
 						Orientation="Horizontal"
-						Background="Transparent"/>
+						Background="Transparent"
+						MouseWheel="ZoomInOut_MouseWheel" />
 		</ScrollViewer>
-
-		<Border x:Name="add_boat"
-				Grid.Row="2"
-				Width="50"
-				Height="50"
-				CornerRadius="50"
-				HorizontalAlignment="Right"
-				VerticalAlignment="Center"
-				Margin="20 0">
-			<Border.Background>
-				<SolidColorBrush>
-					<SolidColorBrush.Color>
-						<Color A="255" R="0" G="65" B="101"/>
-					</SolidColorBrush.Color>
-				</SolidColorBrush>
-			</Border.Background>
-			<Label FontSize="30"
-					FontWeight="Bold"
-					HorizontalAlignment="Center"
-					VerticalAlignment="Center"
-					Margin="-2 -5 -2 0">+</Label>
-		</Border>
-
 	</Grid>
 </Page>

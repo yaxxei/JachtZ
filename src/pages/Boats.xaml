@@ -36,7 +36,8 @@
 					   Source="{StaticResource search}"
 					   Width="20"
 					   Height="20"
-					   MouseDown="search_MouseDown" />
+					   MouseDown="search_MouseDown"
+					   Cursor="Hand"/>
 				<TextBox x:Name="search_text" MinWidth="150"
 						 VerticalAlignment="Center"
 						 Padding="7 2"
